@@ -24,18 +24,41 @@
                         <a href="{{ route('topics.index') }}" class="text-neutral-600 hover:text-primary-600">
                             讨论
                         </a>
+                        <a href="{{ route('activities.index') }}" class="text-neutral-600 hover:text-primary-600">
+                            同城活动
+                        </a>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 text-sm">
                     @auth
-                        <a href="{{ route('topics.create') }}" class="btn-primary">
-                            发布主题
-                        </a>
-                        <span class="text-neutral-700">{{ auth()->user()->username }}</span>
-                        <form method="POST" action="{{ route('logout') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="text-neutral-500 hover:text-neutral-800">登出</button>
-                        </form>
+                        <div class="flex items-center space-x-3">
+                            <a href="{{ route('topics.create') }}" class="btn-primary">
+                                发布主题
+                            </a>
+                            <div class="relative" id="user-menu">
+                                <button id="user-menu-button" class="flex items-center gap-1 text-neutral-600 hover:text-primary-600">
+                                    <span>{{ auth()->user()->username }}</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </button>
+                                <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-neutral-100 py-1 z-50">
+                                    <a href="{{ route('activities.my') }}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">
+                                        我发起的活动
+                                    </a>
+                                    <a href="{{ route('activities.joined') }}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">
+                                        我参与的活动
+                                    </a>
+                                    <div class="border-t border-neutral-100 my-1"></div>
+                                    <form method="POST" action="{{ route('logout') }}" class="block">
+                                        @csrf
+                                        <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-neutral-50">
+                                            登出
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     @else
                         <a href="{{ route('login') }}" class="text-neutral-500 hover:text-neutral-800">登录</a>
                         <a href="{{ route('register') }}" class="btn-primary">注册</a>

@@ -1,6 +1,6 @@
 # 学习交流论坛
 
-一个基于 Laravel Blade + Tailwind CSS 的学习交流论坛系统，支持用户注册登录、主题发布、回复讨论等功能
+一个基于 Laravel Blade + Tailwind CSS 的学习交流论坛系统，支持用户注册登录、主题发布、回复讨论、同城活动报名群聊等功能
 
 > **⚠️ 使用前必读**：请等待容器启动成功、依赖安装及数据初始化完成后，再打开网页访问；否则可能无法正常打开页面。
 
@@ -89,17 +89,24 @@ forum/
 ├── backend/          # Laravel 后端（包含 Blade 视图）
 │   ├── app/
 │   │   ├── Http/
-│   │   │   ├── Controllers/     # Web 控制器
-│   │   │   └── Controllers/Api/ # API 控制器
-│   │   └── Models/
+│   │   │   ├── Controllers/         # Web 控制器
+│   │   │   ├── Controllers/Api/     # API 控制器
+│   │   │   └── Requests/            # 表单请求
+│   │   └── Models/                  # 数据模型（包含 Activity、ActivityRegistration 等）
+│   ├── database/
+│   │   ├── migrations/              # 数据库迁移
+│   │   └── seeders/                 # 数据填充
 │   ├── resources/
-│   │   ├── views/     # Blade 模板
-│   │   ├── css/       # Tailwind CSS
-│   │   └── js/        # JavaScript
+│   │   ├── views/                   # Blade 模板
+│   │   │   ├── topics/              # 主题相关页面
+│   │   │   ├── activities/          # 活动相关页面
+│   │   │   └── auth/                # 认证相关页面
+│   │   ├── css/                     # Tailwind CSS
+│   │   └── js/                      # JavaScript
 │   └── routes/
-│       ├── web.php    # Web 路由
-│       └── api.php    # API 路由
-├── nginx/             # Nginx 配置
+│       ├── web.php                  # Web 路由
+│       └── api.php                  # API 路由
+├── nginx/                           # Nginx 配置
 └── docker-compose.yml
 ```
 

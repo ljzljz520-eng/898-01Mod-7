@@ -3,6 +3,23 @@ import '../css/app.css';
 
 // 简单的交互增强
 document.addEventListener('DOMContentLoaded', function() {
+    // 用户菜单下拉
+    const userMenuButton = document.getElementById('user-menu-button');
+    const userMenuDropdown = document.getElementById('user-menu-dropdown');
+    
+    if (userMenuButton && userMenuDropdown) {
+        userMenuButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userMenuDropdown.classList.toggle('hidden');
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!userMenuDropdown.contains(e.target) && e.target !== userMenuButton) {
+                userMenuDropdown.classList.add('hidden');
+            }
+        });
+    }
+
     // 自动关闭提示
     document.querySelectorAll('[data-auto-dismiss]').forEach(alertEl => {
         const timeout = Number(alertEl.dataset.autoDismiss) || 3000;
