@@ -218,7 +218,7 @@
                                 </a>
                             @endif
                             @if(in_array($registration->status, ['confirmed', 'waitlist']) && $activity->status === 'recruiting')
-                                <form method="POST" action="{{ route('activities.cancel-registration', $activity) }}">
+                                <form method="POST" action="{{ route('activities.cancel', $activity) }}">
                                     @csrf
                                     <button type="submit" class="btn-secondary w-full text-red-600 border-red-200 hover:bg-red-50">
                                         取消报名

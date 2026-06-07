@@ -19,19 +19,22 @@ Route::resource('topics', App\Http\Controllers\TopicController::class);
 Route::post('topics/{topic}/replies', [App\Http\Controllers\ReplyController::class, 'store'])->name('replies.store')->middleware('auth');
 Route::delete('replies/{reply}', [App\Http\Controllers\ReplyController::class, 'destroy'])->name('replies.destroy')->middleware('auth');
 
-// 同城活动路由
-Route::group(['prefix' => 'activities', 'as' => 'activities.'], function () {
-    Route::get('/', [App\Http\Controllers\ActivityController::class, 'index'])->name('index');
-    Route::get('/create', [App\Http\Controllers\ActivityController::class, 'create'])->name('create')->middleware('auth');
-    Route::post('/', [App\Http\Controllers\ActivityController::class, 'store'])->name('store')->middleware('auth');
-    Route::get('/my', [App\Http\Controllers\ActivityController::class, 'my'])->name('my')->middleware('auth');
-    Route::get('/joined', [App\Http\Controllers\ActivityController::class, 'joined'])->name('joined')->middleware('auth');
-    Route::get('/{activity}', [App\Http\Controllers\ActivityController::class, 'show'])->name('show');
-    Route::get('/{activity}/edit', [App\Http\Controllers\ActivityController::class, 'edit'])->name('edit')->middleware('auth');
-    Route::put('/{activity}', [App\Http\Controllers\ActivityController::class, 'update'])->name('update')->middleware('auth');
-    Route::delete('/{activity}', [App\Http\Controllers\ActivityController::class, 'destroy'])->name('destroy')->middleware('auth');
-    Route::post('/{activity}/register', [App\Http\Controllers\ActivityController::class, 'register'])->name('register')->middleware('auth');
-    Route::post('/{activity}/cancel', [App\Http\Controllers\ActivityController::class, 'cancelRegistration'])->name('cancel')->middleware('auth');
-    Route::get('/{activity}/group', [App\Http\Controllers\ActivityController::class, 'group'])->name('group')->middleware('auth');
-    Route::post('/{activity}/send-message', [App\Http\Controllers\ActivityController::class, 'sendMessage'])->name('send-message')->middleware('auth');
-});
+// 知识卡片路由
+Route::resource('knowledge-cards', App\Http\Controllers\KnowledgeCardController::class);
+Route::post('knowledge-cards/{knowledgeCard}/review', [App\Http\Controllers\KnowledgeCardController::class, 'review'])->name('knowledge-cards.review')->middleware('auth');
+Route::get('knowledge-cards-review', [App\Http\Controllers\KnowledgeCardController::class, 'reviewList'])->name('knowledge-cards.review-list')->middleware('auth');
+
+// 用户资料路由
+Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile')->middleware('auth');
+
+// 认证相关路由
+Route::get('/verify-apply', [App\Http\Controllers\AuthController::class, 'showVerificationForm'])->name('verify.apply')->middleware('auth');
+Route::post('/verify-apply', [App\Http\Controllers\AuthController::class, 'applyVerification'])->middleware('auth');
+Route::get('/verification-list', [App\Http\Controllers\AuthController::class, 'verificationList'])->name('verification.list')->middleware('auth');
+Route::post('/verification-review/{user}', [App\Http\Controllers\AuthController::class, 'reviewVerification'])->name('verification.review')->middleware('auth');
+Route::get('/move-out', [App\Http\Controllers\AuthController::class, 'showMoveOutForm'])->name('move.out')->middleware('auth');
+Route::post('/move-out', [App\Http\Controllers\AuthController::class, 'moveOut'])->middleware('auth');
+Route::post('/cancel-verification', [App\Http\Controllers\AuthController::class, 'cancelVerification'])->name('verification.cancel')->middleware('auth');
+
+// 楼栋路由
+Route::resource('buildings', App\Http\Controllers\BuildingController::class);

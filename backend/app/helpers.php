@@ -11,102 +11,109 @@ if (!function_exists('category_name')) {
             'tech' => '技术交流',
             'study' => '学习心得',
             'question' => '问题求助',
+            'maintenance' => '物业维修',
+            'conflict' => '邻里矛盾',
+            'fee' => '费用公示',
             default => $category,
         };
     }
 }
 
-if (!function_exists('activity_category_name')) {
-    function activity_category_name(string $category): string
+if (!function_exists('circle_type_name')) {
+    /**
+     * 获取圈层类型的中文名称
+     */
+    function circle_type_name(string $circleType): string
     {
-        return match($category) {
-            'badminton' => '羽毛球',
-            'book_club' => '读书会',
-            'parent_child_market' => '亲子市集',
-            'other' => '其他活动',
-            default => $category,
+        return match($circleType) {
+            'public' => '公共广场',
+            'building' => '楼栋专属',
+            'committee' => '业委会',
+            'tenant' => '租户专区',
+            default => $circleType,
         };
     }
 }
 
-if (!function_exists('activity_category_color')) {
-    function activity_category_color(string $category): string
+if (!function_exists('resident_type_name')) {
+    /**
+     * 获取住户类型的中文名称
+     */
+    function resident_type_name(?string $residentType): string
     {
-        return match($category) {
-            'badminton' => 'bg-green-100 text-green-700',
-            'book_club' => 'bg-blue-100 text-blue-700',
-            'parent_child_market' => 'bg-pink-100 text-pink-700',
-            'other' => 'bg-gray-100 text-gray-700',
-            default => 'bg-gray-100 text-gray-700',
+        return match($residentType) {
+            'owner' => '业主',
+            'tenant' => '租户',
+            'committee' => '业委会成员',
+            null => '未认证',
+            default => $residentType,
         };
     }
 }
 
-if (!function_exists('activity_status_name')) {
-    function activity_status_name(string $status): string
+if (!function_exists('verification_status_name')) {
+    /**
+     * 获取认证状态的中文名称
+     */
+    function verification_status_name(string $status): string
     {
         return match($status) {
-            'draft' => '草稿',
-            'recruiting' => '招募中',
-            'in_progress' => '进行中',
-            'completed' => '已结束',
-            'cancelled' => '已取消',
+            'unverified' => '未认证',
+            'pending' => '审核中',
+            'verified' => '已认证',
+            'rejected' => '已拒绝',
             default => $status,
         };
     }
 }
 
-if (!function_exists('activity_status_color')) {
-    function activity_status_color(string $status): string
+if (!function_exists('circle_name')) {
+    /**
+     * 获取圈层类型的中文名称
+     */
+    function circle_name(string $type): string
     {
-        return match($status) {
-            'draft' => 'bg-gray-100 text-gray-700',
-            'recruiting' => 'bg-emerald-100 text-emerald-700',
-            'in_progress' => 'bg-amber-100 text-amber-700',
-            'completed' => 'bg-blue-100 text-blue-700',
-            'cancelled' => 'bg-red-100 text-red-700',
-            default => 'bg-gray-100 text-gray-700',
+        return match($type) {
+            'public' => '公共广场',
+            'building' => '楼栋讨论',
+            'committee' => '业委会',
+            'tenant' => '租户专区',
+            default => $type,
         };
     }
 }
 
-if (!function_exists('registration_status_name')) {
-    function registration_status_name(string $status): string
+if (!function_exists('extra_field_name')) {
+    /**
+     * 获取扩展字段的中文标签
+     */
+    function extra_field_name(string $field): string
     {
-        return match($status) {
-            'pending' => '待确认',
-            'confirmed' => '已报名',
-            'waitlist' => '候补',
-            'cancelled' => '已取消',
-            'attended' => '已参加',
-            default => $status,
-        };
-    }
-}
-
-if (!function_exists('registration_status_color')) {
-    function registration_status_color(string $status): string
-    {
-        return match($status) {
-            'pending' => 'bg-yellow-100 text-yellow-700',
-            'confirmed' => 'bg-green-100 text-green-700',
-            'waitlist' => 'bg-orange-100 text-orange-700',
-            'cancelled' => 'bg-red-100 text-red-700',
-            'attended' => 'bg-blue-100 text-blue-700',
-            default => 'bg-gray-100 text-gray-700',
-        };
-    }
-}
-
-if (!function_exists('settlement_status_name')) {
-    function settlement_status_name(string $status): string
-    {
-        return match($status) {
-            'draft' => '草稿',
-            'submitted' => '待审核',
-            'approved' => '已通过',
-            'rejected' => '已驳回',
-            default => $status,
+        return match($field) {
+            'unit_number' => '单元号',
+            'description' => '描述',
+            'contact_name' => '联系人',
+            'contact_phone' => '联系电话',
+            'status' => '状态',
+            'reported_at' => '上报时间',
+            'assigned_to' => '分配给',
+            'resolved_at' => '解决时间',
+            'cost' => '费用',
+            'title' => '标题',
+            'involved_parties' => '涉及方',
+            'unit_numbers' => '涉及单元',
+            'contact_info' => '联系方式',
+            'mediator' => '调解人',
+            'resolution' => '解决方案',
+            'fee_type' => '费用类型',
+            'amount' => '金额',
+            'due_date' => '截止日期',
+            'payment_method' => '支付方式',
+            'paid_at' => '支付时间',
+            'receipt_number' => '收据编号',
+            'late_fee' => '滞纳金',
+            'total_amount' => '总金额',
+            default => $field,
         };
     }
 }
